@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- "Mark Favorite", should appear as action button if possible -->
+    <item
+        android:id="@+id/action_curr_loc"
+        android:icon="@drawable/ic_gps_fixed_black_24dp"
+        android:title="@string/current_location"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_load_file"
+        android:icon="@android:drawable/ic_menu_view"
+        android:title="@string/current_location"
+        app:showAsAction="ifRoom"/>
+
+
+</menu>

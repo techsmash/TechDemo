@@ -1,0 +1,105 @@
+apply plugin: 'com.android.application'
+
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+
+}
+
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+    defaultConfig {
+        applicationId "com.example.openweather"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+        }
+    }
+    dexOptions {
+        // For development. This can improve incremental builds, but clean builds may be slower.
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+
+
+    api "com.android.support:appcompat-v7:$supportLibVersion"
+    api "com.android.support:design:$supportLibVersion"
+    api "com.android.support:recyclerview-v7:$supportLibVersion"
+
+    //networking
+    api 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    api "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    api "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
+
+    //RX
+    //Rx
+    compile "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    compile "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    compile 'nl.littlerobots.rxlint:rxlint:1.3'
+
+    //view binding
+    api "com.jakewharton:butterknife:$butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+
+    //dagger
+    api "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    //imaging
+    api  "com.github.bumptech.glide:glide:$glideVersion"
+
+    // RxJava support for Room
+    implementation "android.arch.persistence.room:runtime:1.0.0"
+    annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
+    testImplementation "android.arch.persistence.room:testing:1.0.0"
+    implementation "android.arch.persistence.room:rxjava2:1.0.0"
+
+    //UI Tests
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$espressoCoreVersion", {
+        exclude group: 'com.android.support'
+        exclude group: 'com.google.code.findbugs'
+    })
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:2.2.2@aar", {
+        exclude group: 'com.android.support'
+    })
+    androidTestCompile "com.android.support.test.espresso:espresso-idling-resource:$espressoCoreVersion"
+
+    //Unit Tests
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.assertj:assertj-core:$assertjVersion"
+    testCompile "org.hamcrest:hamcrest-all:1.3"
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+    testCompile "org.robolectric:robolectric:$robolectricVersion"
+    testCompile "org.robolectric:shadows-multidex:$robolectricShadowsVersion"
+    testCompile "org.robolectric:shadows-support-v4:$robolectricShadowsVersion"
+    testCompile "org.robolectric:shadows-play-services:$robolectricShadowsVersion"
+    testCompile("com.squareup.assertj:assertj-android:$assertjAndroidVersion") {
+        exclude module: 'support-annotations'
+    }
+
+
+}
