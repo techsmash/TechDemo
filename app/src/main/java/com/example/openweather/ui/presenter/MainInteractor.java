@@ -18,4 +18,7 @@ public interface MainInteractor {
     Single<City> getCityByName(String cityName);
 
     void loadFromFile();
+
+    Single<WeatherResponse> getWeatherByCityName(String name);
+
 }

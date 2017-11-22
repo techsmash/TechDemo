@@ -1,5 +1,7 @@
 package com.example.openweather.ui.presenter;
 
+import android.util.Log;
+
 import com.example.openweather.api.CityDataSource;
 import com.example.openweather.api.LocalFileService;
 import com.example.openweather.api.OpenWeatherService;
@@ -40,7 +42,7 @@ public class MainInteractorImpl implements MainInteractor {
     @Override
     public Single<WeatherResponse> getWeatherForCity(City city) {
         return openWeatherService.getWeatherForLatLong(city.coord.lat, city.coord.lon)
-                            .subscribeOn(Schedulers.computation());
+                .subscribeOn(Schedulers.computation());
 
 
     }
@@ -51,11 +53,25 @@ public class MainInteractorImpl implements MainInteractor {
                 .subscribeOn(Schedulers.computation());
     }
 
+    @Override
+    public Single<WeatherResponse> getWeatherByCityName(String name) {
+        return openWeatherService.getWeatherByCityName(name)
+                .subscribeOn(Schedulers.computation());
+    }
+
     public void loadFromFile() {
         localFileService.readJsonStreamFlowable()
+                .take(500)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(Schedulers.computation())
-                .subscribe(city->cityDataSource.insertCity(city), throwable -> {throwable.getCause().printStackTrace();});
+                .subscribe(city ->
+                {
+                    Log.d("INSERT", "");
+                    cityDataSource.insertCity(city);
+
+                }, throwable -> {
+                    throwable.getCause().printStackTrace();
+                });
 
 
     }

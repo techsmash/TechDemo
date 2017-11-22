@@ -86,11 +86,12 @@ public class MainFragment extends Fragment implements MainView {
 
         searchView.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                mainPresenter.search(v.getText().toString());
+                mainPresenter.searchForCity(v.getText().toString());
                 return true;
             }
             return false;
         });
+
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

@@ -66,6 +66,14 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
+    public void searchForCity(String key) {
+        mainView.showLoadingIndicator();
+        disposables.add(mainInteractor.getWeatherByCityName(key)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mainView::displayWeatherForCity, mainView::displayError));
+    }
+
+    @Override
     public void fetchWeather(City city) {
         mainView.showLoadingIndicator();
         disposables.add(mainInteractor.getWeatherForCity(city)

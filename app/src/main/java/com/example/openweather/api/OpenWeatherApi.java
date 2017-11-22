@@ -24,4 +24,7 @@ public interface OpenWeatherApi {
 
     @GET("images/{id}/similar")
     Single<ImageResponse> getSimilarImages(@Path("id") String id);
+
+    @GET("./")
+    Single<WeatherResponse> getWeatheryByCityName(@Query("q") String name);
 }

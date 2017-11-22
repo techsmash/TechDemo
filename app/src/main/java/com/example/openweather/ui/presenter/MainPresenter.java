@@ -22,6 +22,8 @@ public interface MainPresenter {
 
     void search(String key);
 
+    void searchForCity(String key);
+
     void fetchWeather(City city);
 
 }

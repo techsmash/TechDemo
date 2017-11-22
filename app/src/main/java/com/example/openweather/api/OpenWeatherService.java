@@ -30,6 +30,10 @@ public class OpenWeatherService {
         return api.getWeatherForLatLong(lat, longitude).subscribeOn(Schedulers.io());
     }
 
+    public Single<WeatherResponse> getWeatherByCityName(String cityName) {
+        return api.getWeatheryByCityName(cityName).subscribeOn(Schedulers.io());
+    }
+
     public Single<MetadataResponse> getImageMetadata(String id) {
         return api.getImageMetadata(id).subscribeOn(Schedulers.io());
     }
