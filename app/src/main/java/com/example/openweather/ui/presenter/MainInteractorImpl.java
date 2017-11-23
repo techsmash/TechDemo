@@ -1,12 +1,18 @@
 package com.example.openweather.ui.presenter;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import com.example.openweather.api.CityDataSource;
 import com.example.openweather.api.LocalFileService;
 import com.example.openweather.api.OpenWeatherService;
 import com.example.openweather.api.model.City;
 import com.example.openweather.api.model.WeatherResponse;
 
+import java.util.List;
+
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -30,33 +36,33 @@ public class MainInteractorImpl implements MainInteractor {
 
     }
 
-
     @Override
-    public Single<WeatherResponse> getWeatherForLatLong(float lat, float longitude) {
-        return openWeatherService.getWeatherForLatLong(lat, longitude)
+    public Single<WeatherResponse> getWeatherForLatLong(double lat, double longitude, String weatherUnit) {
+        return openWeatherService.getWeatherForLatLong(lat, longitude, weatherUnit)
                 .subscribeOn(Schedulers.computation());
     }
 
     @Override
-    public Single<WeatherResponse> getWeatherForCity(City city) {
-        return openWeatherService.getWeatherForLatLong(city.coord.lat, city.coord.lon)
-                            .subscribeOn(Schedulers.computation());
+    public Single<WeatherResponse> getWeatherForCity(City city, String weatherUnit) {
+        return openWeatherService.getWeatherForLatLong(city.coord.lat, city.coord.lon, weatherUnit)
+                .subscribeOn(Schedulers.computation());
 
 
     }
 
     @Override
-    public Single<City> getCityByName(String cityName) {
-        return cityDataSource.getCityByName(cityName)
-                .subscribeOn(Schedulers.computation());
+    public Single<City> getCityByDetail(String cityName, String country) {
+        if (country == null || country.trim().length() == 0) {
+            return cityDataSource.getCityByName(cityName)
+                    .subscribeOn(Schedulers.computation());
+        } else {
+            return cityDataSource.getCityByNameAndCountry(cityName, country)
+                    .subscribeOn(Schedulers.computation());
+        }
     }
 
-    public void loadFromFile() {
-        localFileService.readJsonStreamFlowable()
-                .subscribeOn(Schedulers.computation())
-                .observeOn(Schedulers.computation())
-                .subscribe(city->cityDataSource.insertCity(city), throwable -> {throwable.getCause().printStackTrace();});
-
-
+    public List<City> getSimilarCities(String searchString) {
+        return cityDataSource.getSimilarCities(searchString);
     }
+
 }

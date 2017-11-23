@@ -17,6 +17,7 @@ buildscript {
         assertjVersion = '3.8.0'
         robolectricShadowsVersion = '3.3.2'
         espressoCoreVersion = '2.2.2'
+        playServicesVersion = '10.2.1'
     }
 
     repositories {

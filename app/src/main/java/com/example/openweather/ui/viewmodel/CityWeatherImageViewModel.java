@@ -11,14 +11,12 @@ import com.example.openweather.util.LongPressGestureDetector;
 import static com.example.openweather.ui.viewmodel.ViewModelType.GETTY_IMAGE;
 
 public class CityWeatherImageViewModel extends BaseViewModel<CityWeatherViewHolder> implements LongPressGestureDetector.Listener {
-    private final WeatherResponse.Weather weather;
+    private final WeatherResponse weatherResponse;
     private final Listener listener;
-    private final String id;
 
-    public CityWeatherImageViewModel(String id, WeatherResponse.Weather weather, Listener listener) {
+    public CityWeatherImageViewModel(WeatherResponse weatherResponse, Listener listener) {
         super(R.layout.getty_image_layout);
-        this.id = id;
-        this.weather = weather;
+        this.weatherResponse = weatherResponse;
         this.listener = listener;
     }
 
@@ -29,7 +27,7 @@ public class CityWeatherImageViewModel extends BaseViewModel<CityWeatherViewHold
 
     @Override
     public void bindViewHolder(CityWeatherViewHolder holder) {
-        holder.bind(weather, this);
+        holder.bind(weatherResponse, this);
     }
 
     @Override

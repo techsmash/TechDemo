@@ -27,6 +27,9 @@
             android:label="@string/empty_string"
             android:theme="@style/AppTheme.Transparent"/>
 
+        <service android:name=".service.CreateDatabaseService" >
+        </service>
+
     </application>
 
 </manifest>

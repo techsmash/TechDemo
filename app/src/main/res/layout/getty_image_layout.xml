@@ -1,23 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="144dp"
-    android:orientation="vertical"
+<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:background="@android:color/holo_blue_light">
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    card_view:cardCornerRadius="4dp">
 
     <TextView
         android:id="@+id/city_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/colorAccent"
+        android:textSize="15sp"
         tools:text="City Name"/>
 
-    <ImageView
-        android:id="@+id/image_view"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_marginTop="30dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="centerCrop" />
+        android:layout_height="match_parent">
+
+        <TableRow>
+            <TextView
+                android:id="@+id/weather_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                tools:text="City Name"/>
+            <ImageView
+                android:id="@+id/image_view"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop" />
+        </TableRow>
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+        <TableRow>
+            <TextView
+                android:id="@+id/weather_temp_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                android:text="@string/temperature_text"
+                tools:text="Temperature"/>
+            <TextView
+                android:id="@+id/weather_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                tools:text="36"/>
+        </TableRow>
+
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+
+        <TableRow>
+            <TextView
+                android:id="@+id/weather_pressure_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                android:text="@string/pressure_text"
+                tools:text="Pressure"/>
+            <TextView
+                android:id="@+id/weather_pressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                tools:text="36"/>
+        </TableRow>
+
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+
+        <TableRow>
+            <TextView
+                android:id="@+id/weather_humidity_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                android:text="@string/humidity_text"
+                tools:text="Humidity"/>
+            <TextView
+                android:id="@+id/weather_humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                tools:text="36"/>
+        </TableRow>
 
 
-</LinearLayout>
+    </TableLayout>
+
+    </android.support.v7.widget.CardView>
+
+

@@ -23,12 +23,25 @@ public class CityWeatherViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.city_name)
     TextView cityName;
 
+    @BindView(R.id.weather_status)
+    TextView weatherStatus;
+
+    @BindView(R.id.weather_temp)
+    TextView temperatureTextView;
+
+    @BindView(R.id.weather_pressure)
+    TextView pressureTextView;
+
+    @BindView(R.id.weather_humidity)
+    TextView humidityTextView;
+
+
     public CityWeatherViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
 
-    public void bind(WeatherResponse.Weather weather, LongPressGestureDetector.Listener listener) {
+    public void bind(WeatherResponse weatherResponse, LongPressGestureDetector.Listener listener) {
         GestureDetectorCompat gestureDetector = new GestureDetectorCompat(itemView.getContext(), new LongPressGestureDetector(listener));
 
         itemView.setOnTouchListener((v, event) -> {
@@ -36,9 +49,17 @@ public class CityWeatherViewHolder extends RecyclerView.ViewHolder {
             return true;
         });
 
-        cityName.setText(weather.getDescription());
-        Glide.with(itemView.getContext())
-                .load(String.format(itemView.getContext().getString(R.string.imageUrlPrefix),weather.getIcon()))
-                .into(imageView);
+        WeatherResponse.Weather weather = weatherResponse.getWeatherList().get(0);
+
+        weatherStatus.setText(weather.getDescription());
+        temperatureTextView.setText(""+weatherResponse.getMain().getTemp());
+        humidityTextView.setText(""+weatherResponse.getMain().getHumidity());
+        pressureTextView.setText(""+weatherResponse.getMain().getPressure());
+        cityName.setText(weatherResponse.getName());
+        if (weather.getIcon() != null) {
+            Glide.with(itemView.getContext())
+                    .load(String.format(itemView.getContext().getString(R.string.imageUrlPrefix), weather.getIcon()))
+                    .into(imageView);
+        }
     }
 }

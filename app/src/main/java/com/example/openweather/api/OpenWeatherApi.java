@@ -20,7 +20,8 @@ public interface OpenWeatherApi {
     Single<MetadataResponse> getImageMetadata(@Path("id") String id);
 
     @GET("./")
-    Single<WeatherResponse> getWeatherForLatLong(@Query("lat") float lat, @Query("lon") float lon);
+    Single<WeatherResponse> getWeatherForLatLong(@Query("lat") double lat, @Query("lon") double lon
+            , @Query("units") String units);
 
     @GET("images/{id}/similar")
     Single<ImageResponse> getSimilarImages(@Path("id") String id);

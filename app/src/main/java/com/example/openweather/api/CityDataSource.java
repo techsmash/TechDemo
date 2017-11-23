@@ -15,9 +15,13 @@ public interface CityDataSource {
 
     Single<City> getCityByName(String name);
 
+    Single<City> getCityByNameAndCountry(String name, String country);
+
     void insertCity(List<City> cities);
 
     void insertCity(City city);
+
+    public List<City> getSimilarCities(String searchString);
 
 
 }

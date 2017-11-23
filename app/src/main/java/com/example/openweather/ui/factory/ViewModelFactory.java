@@ -11,7 +11,7 @@ public class ViewModelFactory {
     public ViewModelFactory() {
     }
 
-    public CityWeatherImageViewModel createViewModel(String id, WeatherResponse.Weather weather, CityWeatherImageViewModel.Listener listener) {
-        return new CityWeatherImageViewModel(id, weather, listener);
+    public CityWeatherImageViewModel createViewModel(WeatherResponse weatherResponse, CityWeatherImageViewModel.Listener listener) {
+        return new CityWeatherImageViewModel(weatherResponse, listener);
     }
 }

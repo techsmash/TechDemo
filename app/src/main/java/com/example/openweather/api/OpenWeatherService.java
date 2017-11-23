@@ -26,8 +26,8 @@ public class OpenWeatherService {
     }
 
 
-    public Single<WeatherResponse> getWeatherForLatLong(float lat, float longitude) {
-        return api.getWeatherForLatLong(lat, longitude).subscribeOn(Schedulers.io());
+    public Single<WeatherResponse> getWeatherForLatLong(double lat, double longitude, String weatherUnit) {
+        return api.getWeatherForLatLong(lat, longitude, weatherUnit).subscribeOn(Schedulers.io());
     }
 
     public Single<MetadataResponse> getImageMetadata(String id) {

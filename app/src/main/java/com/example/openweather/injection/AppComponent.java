@@ -7,13 +7,9 @@ import com.example.openweather.api.CityDataSource;
 import com.example.openweather.api.LocalFileService;
 import com.example.openweather.api.OpenWeatherApi;
 import com.example.openweather.api.OpenWeatherService;
+import com.example.openweather.service.CreateDatabaseService;
 import com.example.openweather.ui.activity.BaseActivity;
-import com.example.openweather.ui.activity.MainActivity;
-import com.example.openweather.ui.activity.PermissionActivity;
-import com.example.openweather.ui.activity.PermissionInteractor;
-import com.example.openweather.ui.fragment.MainFragment;
-import com.example.openweather.ui.fragment.PopUpDialogFragment;
-import com.example.openweather.ui.presenter.MainModule;
+import com.patloew.rxlocation.RxLocation;
 
 import javax.inject.Singleton;
 
@@ -26,6 +22,8 @@ public interface AppComponent {
 
     void inject(BaseActivity baseActivity);
 
+    void inject(CreateDatabaseService createDatabaseService);
+
     Context getContext();
 
     CityDataSource getCityDataSource();
@@ -35,6 +33,8 @@ public interface AppComponent {
     OpenWeatherApi getWeatherApi();
 
     LocalFileService localFileService();
+
+    RxLocation getRxLocation();
 
 
 }

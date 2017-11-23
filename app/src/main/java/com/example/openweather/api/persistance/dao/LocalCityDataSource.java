@@ -29,6 +29,11 @@ public class LocalCityDataSource implements CityDataSource {
     }
 
     @Override
+    public Single<City> getCityByNameAndCountry(String name, String country) {
+        return cityDao.getCityByNameAndCountry(name, country);
+    }
+
+    @Override
     public void insertCity(List<City> cities) {
         cityDao.insertCity(cities);
     }
@@ -37,6 +42,11 @@ public class LocalCityDataSource implements CityDataSource {
     @Override
     public void insertCity(City city) {
         cityDao.insertCity(city);
+    }
+
+    @Override
+    public List<City> getSimilarCities(String searchString) {
+        return cityDao.getSimilarCities( searchString.toLowerCase()+"%");
     }
 
 

@@ -3,6 +3,8 @@ package com.example.openweather.ui.presenter;
 import com.example.openweather.api.model.City;
 import com.example.openweather.api.model.WeatherResponse;
 
+import java.util.List;
+
 import io.reactivex.Single;
 
 /**
@@ -11,11 +13,12 @@ import io.reactivex.Single;
 
 public interface MainInteractor {
 
-    Single<WeatherResponse> getWeatherForLatLong(float lat, float longitude);
+    Single<WeatherResponse> getWeatherForLatLong(double lat, double longitude, @WeatherResponse.WeatherUnit String weatherUnit);
 
-    Single<WeatherResponse> getWeatherForCity(City city);
+    Single<WeatherResponse> getWeatherForCity(City city, @WeatherResponse.WeatherUnit String weatherUnit);
 
-    Single<City> getCityByName(String cityName);
+    Single<City> getCityByDetail(String cityName, String country);
 
-    void loadFromFile();
+    List<City> getSimilarCities(String searchString);
+
 }

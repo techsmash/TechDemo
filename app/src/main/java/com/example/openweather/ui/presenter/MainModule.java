@@ -9,6 +9,7 @@ import com.example.openweather.api.OpenWeatherService;
 import com.example.openweather.api.persistance.dao.CityDatabase;
 import com.example.openweather.api.persistance.dao.LocalCityDataSource;
 import com.example.openweather.injection.ActivityScope;
+import com.patloew.rxlocation.RxLocation;
 
 import javax.inject.Singleton;
 
@@ -30,9 +31,10 @@ public class MainModule {
 
     @Provides
     @ActivityScope
-    MainPresenter provideMainPresenterPresenter(MainInteractor interactor) {
-        return new MainPresenterImpl(mainView, interactor);
+    MainPresenter provideMainPresenterPresenter(MainInteractor interactor, RxLocation rxLocation) {
+        return new MainPresenterImpl(mainView, interactor, rxLocation);
     }
+
 
     @Provides
     @ActivityScope

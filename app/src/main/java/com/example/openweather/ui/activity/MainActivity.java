@@ -1,7 +1,6 @@
 package com.example.openweather.ui.activity;
 
 import android.Manifest;
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -14,21 +13,13 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.openweather.R;
-import com.example.openweather.api.CityDataSource;
-import com.example.openweather.api.LocalFileService;
-import com.example.openweather.api.persistance.dao.CityDatabase;
-import com.example.openweather.api.model.City;
-import com.example.openweather.api.persistance.dao.LocalCityDataSource;
 import com.example.openweather.ui.fragment.MainFragment;
-
-import java.io.IOException;
-import java.util.List;
-
-import javax.inject.Inject;
+import com.example.openweather.ui.presenter.OnLocationPermissionGrantedListener;
 
 public class MainActivity extends BaseActivity {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 10;
+    private static final String FRAG_TAG = "mainFragTag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +28,7 @@ public class MainActivity extends BaseActivity {
         setupToolbar();
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragment_container, MainFragment.newInstance())
+                .add(R.id.fragment_container, MainFragment.newInstance(), FRAG_TAG)
                 .commit();
     }
 
@@ -75,22 +66,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    /*private void loadFile() {
-        LocalFileService localFileService = new LocalFileService();
-        try {
-            List<City> cities = localFileService.readJsonStream(this);
-            Toast.makeText(this, "read complete:" + cities.size(), Toast.LENGTH_LONG).show();
-            CityDatabase cityDatabase = Room.databaseBuilder(getApplicationContext()
-                    , CityDatabase.class, "city_list").allowMainThreadQueries().build(); //TODO need to do this in the backgrd thread
-            cityDatabase.getCityDao().insertCity(cities);
-            cityDatabase.getCityDao().getCityByName("Novinki").subscribe((city)->{
-                Toast.makeText(this, "Fetched record : "+city.id, Toast.LENGTH_LONG).show();
-            });
-        } catch (IOException e) {
-            Toast.makeText(this, "read error", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
-    }*/
 
     private void processCurrentLocationRequest() {
         int permissionCheck = ContextCompat.checkSelfPermission(this,
@@ -98,6 +73,7 @@ public class MainActivity extends BaseActivity {
         if (PackageManager.PERMISSION_GRANTED == permissionCheck) {
             //load the fused location provider
             Toast.makeText(this, "already have location permission", Toast.LENGTH_LONG).show();
+            processPermissionComplete();
         } else {
             PermissionActivity.startActivityForResult(this, LOCATION_PERMISSION_REQUEST_CODE,
                     getString(R.string.location_permission_rational),
@@ -111,10 +87,15 @@ public class MainActivity extends BaseActivity {
             //TODO
             if (resultCode == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "got location permission", Toast.LENGTH_LONG).show();
+                processPermissionComplete();
             } else {
                 Toast.makeText(this, "User denied", Toast.LENGTH_LONG).show();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void processPermissionComplete() {
+        ((OnLocationPermissionGrantedListener)getSupportFragmentManager().findFragmentByTag(FRAG_TAG)).onLocationPermissionGranted();
     }
 }

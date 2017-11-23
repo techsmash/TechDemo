@@ -3,6 +3,8 @@ package com.example.openweather.ui.presenter;
 import com.example.openweather.api.model.City;
 import com.example.openweather.api.model.WeatherResponse;
 
+import java.util.List;
+
 import io.reactivex.Single;
 
 /**
@@ -16,6 +18,10 @@ public interface MainView  {
     void displayError(Throwable throwable);
     void displayCity(City city);
 
-    void setData(WeatherResponse.Weather weather);
+    void locationError();
+
+    void setData(WeatherResponse weatherResponse);
+
     boolean isDatabaseExists();
+    void startServiceToCreateDB();
 }

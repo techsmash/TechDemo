@@ -8,12 +8,27 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton android:id="@+id/radio_celcius"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Celcius"
+                android:checked="true"/>
+            <RadioButton android:id="@+id/radio_farenheit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Farenheit"/>
+        </RadioGroup>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp">
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/search_phrase"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

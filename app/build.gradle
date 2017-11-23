@@ -47,6 +47,11 @@ dependencies {
     api "com.android.support:appcompat-v7:$supportLibVersion"
     api "com.android.support:design:$supportLibVersion"
     api "com.android.support:recyclerview-v7:$supportLibVersion"
+    api "com.android.support:cardview-v7:$supportLibVersion"
+
+    api "com.google.android.gms:play-services-location:$playServicesVersion"
+    api 'com.patloew.rxlocation:rxlocation:1.0.4'
+
 
     //networking
     api 'com.squareup.okhttp3:logging-interceptor:3.6.0'
@@ -77,6 +82,9 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
     testImplementation "android.arch.persistence.room:testing:1.0.0"
     implementation "android.arch.persistence.room:rxjava2:1.0.0"
+
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
 
     //UI Tests
     androidTestCompile("com.android.support.test.espresso:espresso-core:$espressoCoreVersion", {
